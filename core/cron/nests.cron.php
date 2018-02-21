@@ -15,10 +15,10 @@ if (!empty($config->system->nest_exclude_pokemon)) {
 $req = "SELECT p.pokemon_id, max(p.latitude) AS latitude, max(p.longitude) AS longitude, count(p.pokemon_id) AS total_pokemon, s.kind, s.latest_seen
         FROM pokemon p 
         INNER JOIN spawnpoint s ON (p.spawnpoint_id = s.id) 
-        WHERE p.disappear_time > UTC_TIMESTAMP() - INTERVAL 24 HOUR 
+        WHERE p.disappear_time > UTC_TIMESTAMP() - INTERVAL 72 HOUR 
         ".$pokemon_exclude_sql." 
         GROUP BY p.spawnpoint_id, p.pokemon_id 
-        HAVING count(p.pokemon_id) >= 6 
+        HAVING count(p.pokemon_id) >= 3
         ORDER BY p.pokemon_id";
 $result = $mysqli->query($req);
 
